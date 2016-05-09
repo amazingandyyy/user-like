@@ -104,7 +104,8 @@ app.controller('profileSettingCtrl', function($http, $scope, Auth, User) {
 app.controller('wallCtrl', function($http, $scope, Auth, User, Post) {
     console.log('wallCtrl loaded');
     $http.get('/api/users/posts').then(function(res) {
-        $scope.posts = res.data;
+        var posts = res.data.reverse();
+        $scope.posts = posts;
     }, function(err) {
         console.log('user is not logged in.');
     })
@@ -116,6 +117,7 @@ app.controller('wallCtrl', function($http, $scope, Auth, User, Post) {
         Post.post(userId, body).then(function(res) {
             console.log(res.data);
             $scope.posts.unshift(res.data);
+            $scope.post = null;
         }, function(err) {
             console.log(err);
         })

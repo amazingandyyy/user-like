@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 router.get('/posts', (req, res) => {
     Post.find({}, (err, posts) => {
         res.status(err ? 400 : 200).send(err || posts);
-    });
+    }).populate('user');
 });
 
 //   /api/users/register
@@ -32,8 +32,8 @@ router.post('/:id/post', (req, res) => {
         body: body
     }
     console.log('postObj: ', postObj);
-    Post.post(postObj, err => {
-        res.status(err ? 400 : 200).send(err);
+    Post.post(postObj, (err, post)  => {
+        res.status(err ? 400 : 200).send(err || post);
     });
 });
 router.put('/:userId/like/:postId', (req, res) => {

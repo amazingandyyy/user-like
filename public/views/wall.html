@@ -19,11 +19,20 @@
     <div class="list-group" style="cursor: pointer;">
         <span href="#" class="list-group-item">
             <h5 class="list-group-item-text"><i class="fa fa-user"></i> {{post.body}}</h5>
-            <h5 class="list-group-item-text"><i class="fa fa-user"></i> {{post.user[0].username}}</h5>
-            <h5 class="list-group-item-text"><i class="fa fa-user"></i> {{post.time}}</h5>
+            <h5 class="list-group-item-text" ng-if="!post.user[0].username"><i class="fa fa-user"></i> {{currentUser.username}}</h5>
+            <h5 class="list-group-item-text" ng-if="post.user[0].username"><i class="fa fa-user"></i> {{post.user[0].username}}</h5>
+            <h5 class="list-group-item-text"><i class="fa fa-user"></i> {{post.time | date : 'MMM-dd HH:mm:ss'}}</h5>
             <br>
-            <!-- <button type="button" class="btn btn-link btn-xs like" ng-click="like(post)"><span>{{post.likes.length}}</span> Like <i ng-if="!thumbUp(post.likes)" class="fa fa-thumbs-o-up" aria-hidden="true"></i><i ng-if="thumbUp(post.likes)" class="fa fa-thumbs-up" aria-hidden="true"></i></button> -->
-            <button type="button" class="btn btn-link btn-xs like" ng-click="like(post)"><span>{{post.likes.length}}</span> Like <i ng-if="post.likes.indexOf(currentUser._id)==-1 || post.thumbUp == false" class="fa fa-thumbs-o-up" aria-hidden="true"></i><i ng-if="post.likes.indexOf(currentUser._id)>-1 || thumbUp == true" class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+        <span class="btn btn-xs like" ng-click="like(post)">
+            <span ng-if="post.likes.indexOf(currentUser._id)==-1 || post.thumbUp == false">
+                <span>{{post.likes.length}}</span>
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+            </span>
+            <span class="btn-link" ng-if="post.likes.indexOf(currentUser._id)>-1 || thumbUp == true">
+                <span>{{post.likes.length}}</span>
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+            </span>
+        </span>
         </span>
     </div>
 </div>

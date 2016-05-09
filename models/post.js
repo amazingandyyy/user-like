@@ -24,9 +24,9 @@ var postSchema = new mongoose.Schema({
 });
 
 postSchema.statics.post = function(postObj, cb) {
-    this.create(postObj, (err, user) => {
+    this.create(postObj, (err, post) => {
         if (err) return cb(err);
-        cb(null);
+        cb(null, post);
     });
 };
 postSchema.statics.liked = function(userId, postId, cb) {
