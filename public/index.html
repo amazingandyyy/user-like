@@ -26,8 +26,11 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse" ng-class="{collapse: isCollapsed}">
-                <ul class="nav navbar-nav">
+                <!-- <ul class="nav navbar-nav">
                     <li><a ui-sref="community">Community</a></li>
+                </ul> -->
+                <ul class="nav navbar-nav">
+                    <li><a ui-sref="wall">Wall</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" ng-hide="currentUser">
                     <form class="navbar-form" ng-submit="logIn(loginInfo)">

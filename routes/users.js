@@ -2,10 +2,16 @@ var express = require('express');
 var router = express.Router();
 
 var User = require('../models/user');
+var Post = require('../models/post');
 
 router.get('/', (req, res) => {
     User.find({}, (err, users) => {
         res.status(err ? 400 : 200).send(err || users);
+    });
+});
+router.get('/posts', (req, res) => {
+    Post.find({}, (err, posts) => {
+        res.status(err ? 400 : 200).send(err || posts);
     });
 });
 
@@ -13,6 +19,29 @@ router.get('/', (req, res) => {
 router.post('/register', (req, res) => {
     console.log(req.body);
     User.register(req.body, err => {
+        res.status(err ? 400 : 200).send(err);
+    });
+});
+router.post('/:id/post', (req, res) => {
+    var userId = req.params.id;
+    var body = req.body.body;
+    console.log('body: ', req.body.body);
+    console.log('user: ', req.params);
+    var postObj = {
+        user: userId,
+        body: body
+    }
+    console.log('postObj: ', postObj);
+    Post.post(postObj, err => {
+        res.status(err ? 400 : 200).send(err);
+    });
+});
+router.put('/:userId/like/:postId', (req, res) => {
+    var userId = req.params.userId;
+    var postId = req.params.postId;
+    console.log('userId: ', userId);
+    console.log('postId: ', postId);
+    Post.liked(userId, postId, err => {
         res.status(err ? 400 : 200).send(err);
     });
 });
@@ -46,7 +75,7 @@ router.put('/profile/own', User.isLoggedIn, (req, res) => {
 router.get('/profile/:id', (req, res) => {
     // console.log('ddd');
     console.log('req: ', req.params);
-    var userId =req.params.id;
+    var userId = req.params.id;
     console.log(userId);
     User.findById(userId)
         .exec((err, user) => {

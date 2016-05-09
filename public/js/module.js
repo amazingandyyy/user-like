@@ -27,6 +27,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: '../views/profile.html',
             controller: 'profileCtrl'
         })
+        .state('wall', {
+            url: '/wall',
+            templateUrl: '../views/wall.html',
+            controller: 'wallCtrl'
+        })
 
     $urlRouterProvider.otherwise('home');
 

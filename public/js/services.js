@@ -10,21 +10,21 @@ app.service('Auth', function($http) {
             url: '/api/users/profile/own'
         });
     }
-    this.login = (userObj) =>{
+    this.login = (userObj) => {
         return $http({
             method: 'POST',
             url: '/api/users/login',
             data: userObj
         });
     }
-    this.register = (userObj) =>{
+    this.register = (userObj) => {
         return $http({
             method: 'POST',
             url: '/api/users/register',
             data: userObj
         });
     }
-    this.logout = () =>{
+    this.logout = () => {
         return $http({
             method: 'DELETE',
             url: '/api/users/logout'
@@ -44,6 +44,22 @@ app.service('User', function($http) {
             method: 'PUT',
             url: '/api/users/profile/own',
             data: userObj
+        });
+    }
+});
+
+app.service('Post', function($http) {
+    this.post = (userId, body) => {
+        return $http({
+            method: 'POST',
+            url: `/api/users/${userId}/post`,
+            data: {body: body}
+        });
+    }
+    this.like = (userId, postId) => {
+        return $http({
+            method: 'PUT',
+            url: `/api/users/${userId}/like/${postId}`
         });
     }
 });
