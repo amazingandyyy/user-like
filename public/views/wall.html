@@ -4,7 +4,7 @@
       <input type="text" class="form-control" placeholder="Serch people by name, email, or location..." ng-model="searchFilter">
       <br>
   </div> -->
-<div class="col-sm-12">
+<div class="col-sm-10">
     <form ng-submit="post()">
         <input type="text" class="form-control" placeholder="Post your message" ng-model="post.body">
         <br>
@@ -15,13 +15,13 @@
     <br>
 </div>
 <!-- <h4>{{(users | filter: searchFilter).length}} users found</h4> -->
-<div class="col-sm-8 col-sm-offset-4" ng-repeat="post in posts">
+<div class="col-sm-10" ng-repeat="post in posts">
     <div class="list-group" style="cursor: pointer;">
         <span href="#" class="list-group-item">
-            <h5 class="list-group-item-text"><i class="fa fa-user"></i> {{post.body}}</h5>
-            <h5 class="list-group-item-text" ng-if="!post.user[0].username"><i class="fa fa-user"></i> {{currentUser.username}}</h5>
-            <h5 class="list-group-item-text" ng-if="post.user[0].username"><i class="fa fa-user"></i> {{post.user[0].username}}</h5>
-            <h5 class="list-group-item-text"><i class="fa fa-user"></i> {{post.time | date : 'MMM-dd HH:mm:ss'}}</h5>
+            <h5 class="list-group-item-text" ng-if="!post.user[0].username"><i class="fa fa-user"></i> {{currentUser.username}} said:</h5>
+            <h5 class="list-group-item-text" ng-if="post.user[0].username"><i class="fa fa-user"></i> {{post.user[0].username}} said: </h5>
+            <h3 class="list-group-item-text">{{post.body}}</h3>
+            <h5 class="list-group-item-text">@ {{post.time | date : 'MMM-dd HH:mm:ss'}}</h5>
             <br>
         <span class="btn btn-xs like" ng-click="like(post)">
             <span ng-if="post.likes.indexOf(currentUser._id)==-1 || post.thumbUp == false">
