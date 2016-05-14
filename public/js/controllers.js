@@ -29,7 +29,7 @@ app.controller('mainCtrl', function($http, $scope, Auth, $state) {
             .then(function(res) {
                 $scope.currentUser = null;
                 $scope.loginInfo = null;
-                $state.go('/');
+                $state.go('home');
             }, function(err) {
                 console.log('err: ', err);
             })
