@@ -42,13 +42,10 @@ app.controller('mainCtrl', function($http, $scope, Auth, $state) {
                 console.log(res);
                 $scope.newUser = null;
                 $scope.logIn(newUser);
-                $scope.logMsg.err = null;
                 $state.go('home');
             }, function(err) {
                 console.log('err: ', err);
-                $scope.logMsg = {
-                    err: 'Username is been taken!'
-                }
+
             })
     }
 });
@@ -110,7 +107,8 @@ app.controller('wallCtrl', function($http, $scope, Auth, User, Post) {
         console.log('user is not logged in.');
     })
 
-    $scope.post = () => {
+    $scope.postSubmit = () => {
+        console.log('post');
         var userId = $scope.currentUser._id;
         var body = $scope.post.body;
         console.log(userId, body);
@@ -121,8 +119,10 @@ app.controller('wallCtrl', function($http, $scope, Auth, User, Post) {
         }, function(err) {
             console.log(err);
         })
+
     }
     $scope.like = (post) => {
+
         var userId = $scope.currentUser._id;
         var postId = post._id;
         console.log(userId, postId);
