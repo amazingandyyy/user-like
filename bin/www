@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-require('dotenv').config();
+require('dotenv').load();
 
 var app = require('../app');
 var debug = require('debug')('intro-to-auth:server');
